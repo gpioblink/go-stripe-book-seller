@@ -24,7 +24,7 @@ func NewPrice(cents uint, currency string) (Price, error) {
 }
 
 // NewPriceP works as NewPrice, but on error it will panic instead of returning error.
-func NewPriceP(cents uint, currency string) (Price) {
+func NewPriceP(cents uint, currency string) Price {
 	p, err := NewPrice(cents, currency)
 	if err != nil {
 		panic(err)

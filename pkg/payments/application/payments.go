@@ -23,7 +23,6 @@ func (s PaymentsService) InitializeOrderPayment(orderID string, price price.Pric
 	// ...
 	log.Printf("initializing payment for order %s", orderID)
 
-
 	go func() {
 		time.Sleep(time.Millisecond * 500)
 		if err := s.PostOrderPayment(orderID); err != nil {

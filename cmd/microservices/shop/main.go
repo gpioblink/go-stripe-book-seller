@@ -5,13 +5,13 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/go-chi/chi"
 	"github.com/gpioblink/go-stripe-book-seller/pkg/common/cmd"
 	"github.com/gpioblink/go-stripe-book-seller/pkg/shop"
 	shop_app "github.com/gpioblink/go-stripe-book-seller/pkg/shop/application"
 	shop_infra_product "github.com/gpioblink/go-stripe-book-seller/pkg/shop/infrastructure/products"
 	shop_interfaces_private_http "github.com/gpioblink/go-stripe-book-seller/pkg/shop/interfaces/private/http"
 	shop_interfaces_public_http "github.com/gpioblink/go-stripe-book-seller/pkg/shop/interfaces/public/http"
-	"github.com/go-chi/chi"
 )
 
 func main() {

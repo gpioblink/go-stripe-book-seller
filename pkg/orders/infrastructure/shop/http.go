@@ -42,7 +42,6 @@ func (h HTTPClient) ProductByID(id orders.ProductID) (orders.Product, error) {
 	return OrderProductFromHTTP(productView)
 }
 
-
 func OrderProductFromHTTP(shopProduct http_interface.ProductView) (orders.Product, error) {
 	productPrice, err := OrderProductPriceFromHTTP(shopProduct.Price)
 	if err != nil {

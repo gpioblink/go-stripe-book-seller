@@ -1,8 +1,8 @@
 package products
 
 import (
-	"github.com/gpioblink/go-stripe-book-seller/pkg/common/price"
 	"errors"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/common/price"
 )
 
 type ID string

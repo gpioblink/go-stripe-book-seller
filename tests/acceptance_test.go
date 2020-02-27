@@ -130,7 +130,7 @@ func TestProducts(t *testing.T) {
 	}
 }
 
-func makeRequest(t *testing.T, method string, path string, data interface{}) (*http.Response) {
+func makeRequest(t *testing.T, method string, path string, data interface{}) *http.Response {
 	var body []byte
 
 	if data != nil {

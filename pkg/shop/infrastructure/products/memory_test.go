@@ -42,7 +42,7 @@ func addProduct(t *testing.T, repo *products.MemoryRepository, id string) *produ
 	price, err := price.NewPrice(42, "USD")
 	assert.NoError(t, err)
 
-	p, err := products_domain.NewProduct(products_domain.ID(id), "foo " + id, "bar " + id, price)
+	p, err := products_domain.NewProduct(products_domain.ID(id), "foo "+id, "bar "+id, price)
 	assert.NoError(t, err)
 
 	err = repo.Save(p)

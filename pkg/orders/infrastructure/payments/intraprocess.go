@@ -7,10 +7,10 @@ import (
 )
 
 type IntraprocessService struct {
-	orders chan <- intraprocess.OrderToProcess
+	orders chan<- intraprocess.OrderToProcess
 }
 
-func NewIntraprocessService(ordersChannel chan <- intraprocess.OrderToProcess) IntraprocessService {
+func NewIntraprocessService(ordersChannel chan<- intraprocess.OrderToProcess) IntraprocessService {
 	return IntraprocessService{ordersChannel}
 }
 

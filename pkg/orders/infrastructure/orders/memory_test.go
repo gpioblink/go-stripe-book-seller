@@ -27,7 +27,6 @@ func TestMemoryRepository(t *testing.T) {
 	assert.EqualValues(t, *order2, *repoOrder2)
 }
 
-
 func addOrder(t *testing.T, repo *orders.MemoryRepository, id string) *order_domain.Order {
 	productPrice, err := price.NewPrice(10, "USD")
 	assert.NoError(t, err)

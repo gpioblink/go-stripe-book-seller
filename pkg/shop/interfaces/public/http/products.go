@@ -3,11 +3,11 @@ package http
 import (
 	"net/http"
 
+	"github.com/go-chi/chi"
+	"github.com/go-chi/render"
 	common_http "github.com/gpioblink/go-stripe-book-seller/pkg/common/http"
 	"github.com/gpioblink/go-stripe-book-seller/pkg/common/price"
 	"github.com/gpioblink/go-stripe-book-seller/pkg/shop/domain/products"
-	"github.com/go-chi/chi"
-	"github.com/go-chi/render"
 )
 
 func AddRoutes(router *chi.Mux, productsReadModel productsReadModel) {
