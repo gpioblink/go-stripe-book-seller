@@ -2,7 +2,9 @@ package main
 
 // yep, it's a bit ugly :(
 import (
+	payments_infra_database "github.com/gpioblink/go-stripe-book-seller/pkg/payments/infrastructure/database"
 	payments_infra_stripe "github.com/gpioblink/go-stripe-book-seller/pkg/payments/infrastructure/payments"
+	payments_interfaces_http "github.com/gpioblink/go-stripe-book-seller/pkg/payments/interfaces/public/http"
 	payments_interfaces_stripe_http "github.com/gpioblink/go-stripe-book-seller/pkg/payments/interfaces/stripe/http"
 	"log"
 	"net/http"
@@ -66,9 +68,11 @@ func createMonolith(ordersToPay chan payments_interfaces_intraprocess.OrderToPro
 	)
 	ordersIntraprocessInterface := orders_interfaces_intraprocess.NewOrdersInterface(orderService)
 
+	paymentsRepo := payments_infra_database.NewMemoryRepository()
 	paymentsService := payments_app.NewPaymentsService(
 		payments_infra_orders.NewIntraprocessService(ordersIntraprocessInterface),
-		payments_infra_stripe.NewStripeService(os.Getenv("SHOP_MONOLITH_STRIPE_API_KEY")),
+		payments_infra_stripe.NewStripeService(os.Getenv("SHOP_MONOLITH_STRIPE_SECRET_KEY")),
+		paymentsRepo,
 	)
 	paymentsIntraprocessInterface := payments_interfaces_intraprocess.NewPaymentsInterface(ordersToPay, paymentsService)
 
@@ -79,7 +83,8 @@ func createMonolith(ordersToPay chan payments_interfaces_intraprocess.OrderToPro
 	r := cmd.CreateRouter()
 	shop_interfaces_http.AddRoutes(r, shopProductRepo)
 	orders_interfaces_http.AddRoutes(r, orderService, ordersRepo)
-	payments_interfaces_stripe_http.NewCheckoutInterface(r, paymentsService, os.Getenv("SHOP_MONOLITH_STRIPE_SECRET_KEY"))
+	payments_interfaces_http.AddRoutes(r, paymentsService)
+	payments_interfaces_stripe_http.NewCheckoutInterface(r, paymentsService, os.Getenv("SHOP_MONOLITH_STRIPE_WEBHOOK_SECRET"))
 
 	return r, paymentsIntraprocessInterface
 }
