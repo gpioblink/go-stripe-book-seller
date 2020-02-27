@@ -40,9 +40,6 @@ func (s StripeService) InitPaymentProvider(orderID string, price price.Price) er
 		SuccessURL: stripe.String("https://example.com/success?session_id={CHECKOUT_SESSION_ID}"),
 		CancelURL:  stripe.String("https://example.com/cancel"),
 	}
-	params.SetIdempotencyKey(orderID)
-	params.AddMetadata("order_id", orderID)
-
 	_, err := session.New(params)
 	if err != nil {
 		return err
