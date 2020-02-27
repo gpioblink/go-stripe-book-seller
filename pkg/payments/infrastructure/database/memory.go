@@ -15,7 +15,7 @@ func (m *MemoryRepository) Save(orderToSave *payments.Payment) error {
 	return nil
 }
 
-func (m MemoryRepository) ByOrderId(id string) (*payments.Payment, error) {
+func (m MemoryRepository) ByOrderID(id string) (*payments.Payment, error) {
 	for _, p := range m.orders {
 		if p.OrderId() == id {
 			return &p, nil
@@ -25,7 +25,7 @@ func (m MemoryRepository) ByOrderId(id string) (*payments.Payment, error) {
 	return nil, payments.ErrNotFound
 }
 
-func (m MemoryRepository) ByPaymentId(id string) (*payments.Payment, error) {
+func (m MemoryRepository) ByPaymentID(id string) (*payments.Payment, error) {
 	for _, p := range m.orders {
 		if p.PaymentId() == id {
 			return &p, nil
@@ -35,7 +35,7 @@ func (m MemoryRepository) ByPaymentId(id string) (*payments.Payment, error) {
 	return nil, payments.ErrNotFound
 }
 
-func (m MemoryRepository) DeleteByPaymentId(id string) error {
+func (m MemoryRepository) DeleteByPaymentID(id string) error {
 	var res []payments.Payment
 	flag := false
 	for _, p := range m.orders {
