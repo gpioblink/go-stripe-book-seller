@@ -54,7 +54,7 @@ func (c checkoutResource) ProcessEvent(w http.ResponseWriter, req *http.Request)
 		}
 
 		// Fulfill the purchase...
-		err = c.service.PostOrderPayment(session.ID) // TODO: アプリ発行のIDを返すように変更
+		err = c.service.PostOrderPayment(session.ID)
 		if err != nil {
 			_, _ = fmt.Fprintf(os.Stderr, "Error Confirming Order: %v\n", err)
 			w.WriteHeader(http.StatusBadRequest)
