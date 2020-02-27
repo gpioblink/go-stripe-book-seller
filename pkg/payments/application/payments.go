@@ -63,5 +63,7 @@ func (s PaymentsService) GetPaymentID(orderId string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
+	log.Printf(payment.PaymentId(), payment.OrderId())
 	return payment.PaymentId(), nil
 }
