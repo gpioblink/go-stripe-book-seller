@@ -1,6 +1,7 @@
 package application
 
 import (
+	payments "github.com/gpioblink/go-stripe-book-seller/pkg/payments/domain"
 	"log"
 	"time"
 
@@ -18,10 +19,11 @@ type providerService interface {
 type PaymentsService struct {
 	ordersService   ordersService
 	providerService providerService
+	repository      payments.Repository
 }
 
-func NewPaymentsService(ordersService ordersService, providerService providerService) PaymentsService {
-	return PaymentsService{ordersService, providerService}
+func NewPaymentsService(ordersService ordersService, providerService providerService, repository payments.Repository) PaymentsService {
+	return PaymentsService{ordersService, providerService, repository}
 }
 
 func (s PaymentsService) InitializeOrderPayment(orderID string, price price.Price) error {
@@ -41,8 +43,25 @@ func (s PaymentsService) InitializeOrderPayment(orderID string, price price.Pric
 	return nil
 }
 
-func (s PaymentsService) PostOrderPayment(orderID string) error {
-	log.Printf("payment for order %s done, marking order as paid", orderID)
+func (s PaymentsService) PostOrderPayment(paymentID string) error {
+	// convert PaymentID to OrderID, then send paid info to the order service
+	payment, err := s.repository.ByPaymentID(paymentID)
+	if err != nil {
+		log.Printf("cannot find paymentID: %s", err)
+		return err
+	}
+	log.Printf("payment for payment %s (%s) done, marking order as paid", paymentID, payment.OrderId())
 
-	return s.ordersService.MarkOrderAsPaid(orderID)
+	_ = s.repository.DeleteByPaymentID(paymentID)
+
+	return s.ordersService.MarkOrderAsPaid(payment.OrderId())
+}
+
+// TODO: こんなユースケースあっていいのか？
+func (s PaymentsService) GetPaymentID(orderId string) (string, error) {
+	payment, err := s.repository.ByOrderID(orderId)
+	if err != nil {
+		return "", err
+	}
+	return payment.PaymentId(), nil
 }
