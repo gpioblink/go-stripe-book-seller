@@ -57,7 +57,7 @@ func (s PaymentsService) PostOrderPayment(paymentID string) error {
 	return s.ordersService.MarkOrderAsPaid(payment.OrderId())
 }
 
-// TODO: こんなユースケースあっていいのか？
+// TODO: こんなユースケースあっていいのか？httpのインフラでそのまま使えばいいのでは？
 func (s PaymentsService) GetPaymentID(orderId string) (string, error) {
 	payment, err := s.repository.ByOrderID(orderId)
 	if err != nil {
