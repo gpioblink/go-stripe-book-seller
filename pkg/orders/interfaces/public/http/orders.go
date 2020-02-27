@@ -3,11 +3,11 @@ package http
 import (
 	"net/http"
 
+	"github.com/go-chi/chi"
+	"github.com/go-chi/render"
 	common_http "github.com/gpioblink/go-stripe-book-seller/pkg/common/http"
 	"github.com/gpioblink/go-stripe-book-seller/pkg/orders/application"
 	"github.com/gpioblink/go-stripe-book-seller/pkg/orders/domain/orders"
-	"github.com/go-chi/chi"
-	"github.com/go-chi/render"
 	"github.com/satori/go.uuid"
 )
 
