@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/common/price"
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/orders/domain/orders"
-	payments_amqp_interface "github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/payments/interfaces/amqp"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/common/price"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/orders/domain/orders"
+	payments_amqp_interface "github.com/gpioblink/go-stripe-book-seller/pkg/payments/interfaces/amqp"
 	"github.com/pkg/errors"
 	"github.com/streadway/amqp"
 )

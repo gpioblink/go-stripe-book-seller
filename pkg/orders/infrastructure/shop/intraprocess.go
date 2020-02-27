@@ -1,8 +1,8 @@
 package shop
 
 import (
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/orders/domain/orders"
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/shop/interfaces/private/intraprocess"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/orders/domain/orders"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/shop/interfaces/private/intraprocess"
 )
 
 type IntraprocessService struct {

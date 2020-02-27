@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/orders/domain/orders"
-	orders_http_interface "github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/orders/interfaces/public/http"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/orders/domain/orders"
+	orders_http_interface "github.com/gpioblink/go-stripe-book-seller/pkg/orders/interfaces/public/http"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

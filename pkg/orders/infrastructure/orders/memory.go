@@ -1,6 +1,6 @@
 package orders
 
-import "github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/orders/domain/orders"
+import "github.com/gpioblink/go-stripe-book-seller/pkg/orders/domain/orders"
 
 type MemoryRepository struct {
 	orders []orders.Order

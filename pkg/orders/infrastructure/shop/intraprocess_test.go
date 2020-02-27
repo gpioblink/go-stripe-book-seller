@@ -3,10 +3,10 @@ package shop_test
 import (
 	"testing"
 
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/common/price"
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/orders/domain/orders"
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/orders/infrastructure/shop"
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/shop/interfaces/private/intraprocess"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/common/price"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/orders/domain/orders"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/orders/infrastructure/shop"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/shop/interfaces/private/intraprocess"
 	"github.com/stretchr/testify/assert"
 )
 

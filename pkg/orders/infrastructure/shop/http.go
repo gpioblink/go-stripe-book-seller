@@ -6,9 +6,9 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/common/price"
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/orders/domain/orders"
-	http_interface "github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/shop/interfaces/private/http"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/common/price"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/orders/domain/orders"
+	http_interface "github.com/gpioblink/go-stripe-book-seller/pkg/shop/interfaces/private/http"
 	"github.com/pkg/errors"
 )
 

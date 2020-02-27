@@ -3,7 +3,7 @@ package orders
 import (
 	"errors"
 
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/common/price"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/common/price"
 )
 
 type ProductID string

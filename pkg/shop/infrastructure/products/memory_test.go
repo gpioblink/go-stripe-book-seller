@@ -3,9 +3,9 @@ package products_test
 import (
 	"testing"
 
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/common/price"
-	products_domain "github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/shop/domain/products"
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/shop/infrastructure/products"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/common/price"
+	products_domain "github.com/gpioblink/go-stripe-book-seller/pkg/shop/domain/products"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/shop/infrastructure/products"
 	"github.com/stretchr/testify/assert"
 )
 

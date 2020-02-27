@@ -5,12 +5,12 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/common/cmd"
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/shop"
-	shop_app "github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/shop/application"
-	shop_infra_product "github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/shop/infrastructure/products"
-	shop_interfaces_private_http "github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/shop/interfaces/private/http"
-	shop_interfaces_public_http "github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/shop/interfaces/public/http"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/common/cmd"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/shop"
+	shop_app "github.com/gpioblink/go-stripe-book-seller/pkg/shop/application"
+	shop_infra_product "github.com/gpioblink/go-stripe-book-seller/pkg/shop/infrastructure/products"
+	shop_interfaces_private_http "github.com/gpioblink/go-stripe-book-seller/pkg/shop/interfaces/private/http"
+	shop_interfaces_public_http "github.com/gpioblink/go-stripe-book-seller/pkg/shop/interfaces/public/http"
 	"github.com/go-chi/chi"
 )
 

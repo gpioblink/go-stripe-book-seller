@@ -1,7 +1,7 @@
 package products
 
 import (
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/common/price"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/common/price"
 	"errors"
 )
 

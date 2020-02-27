@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/common/price"
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/payments/application"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/common/price"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/payments/application"
 	"github.com/streadway/amqp"
 )
 

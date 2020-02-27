@@ -5,10 +5,10 @@ import (
 	"log"
 	"os"
 
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/common/cmd"
-	payments_app "github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/payments/application"
-	payments_infra_orders "github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/payments/infrastructure/orders"
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/payments/interfaces/amqp"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/common/cmd"
+	payments_app "github.com/gpioblink/go-stripe-book-seller/pkg/payments/application"
+	payments_infra_orders "github.com/gpioblink/go-stripe-book-seller/pkg/payments/infrastructure/orders"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/payments/interfaces/amqp"
 )
 
 func main() {

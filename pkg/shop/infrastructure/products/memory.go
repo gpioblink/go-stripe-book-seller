@@ -1,7 +1,7 @@
 package products
 
 import (
-	"github.com/ThreeDotsLabs/monolith-microservice-shop/pkg/shop/domain/products"
+	"github.com/gpioblink/go-stripe-book-seller/pkg/shop/domain/products"
 )
 
 type MemoryRepository struct {
