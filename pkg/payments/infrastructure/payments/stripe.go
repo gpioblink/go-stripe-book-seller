@@ -16,9 +16,9 @@ type StripeService struct {
 	// TODO: product情報を取得して決済画面で商品の詳細を表示できるようにする
 }
 
-func NewStripeService(apiKey string) (StripeService, error) {
+func NewStripeService(apiKey string) StripeService {
 	stripe.Key = apiKey
-	return StripeService{}, nil
+	return StripeService{}
 }
 
 func (s StripeService) InitPaymentProvider(orderID string, price price.Price) error {
