@@ -2,6 +2,7 @@ package shop
 
 import (
 	shop_app "github.com/gpioblink/go-stripe-book-seller/pkg/shop/application"
+	"github.com/stripe/stripe-go"
 )
 
 func LoadShopFixtures(productsService shop_app.ProductsService) error {
@@ -10,7 +11,7 @@ func LoadShopFixtures(productsService shop_app.ProductsService) error {
 		Name:          "Product 1",
 		Description:   "Some extra description",
 		PriceCents:    422,
-		PriceCurrency: "USD",
+		PriceCurrency: string(stripe.CurrencyJPY),
 	})
 	if err != nil {
 		return err
@@ -21,6 +22,6 @@ func LoadShopFixtures(productsService shop_app.ProductsService) error {
 		Name:          "Product 2",
 		Description:   "Another extra description",
 		PriceCents:    333,
-		PriceCurrency: "EUR",
+		PriceCurrency: string(stripe.CurrencyJPY),
 	})
 }
