@@ -11,12 +11,17 @@ type ordersService interface {
 	MarkOrderAsPaid(orderID string) error
 }
 
-type PaymentsService struct {
-	ordersService ordersService
+type providerService interface {
+	InitPaymentProvider(orderID string, price price.Price) error
 }
 
-func NewPaymentsService(ordersService ordersService) PaymentsService {
-	return PaymentsService{ordersService}
+type PaymentsService struct {
+	ordersService   ordersService
+	providerService providerService
+}
+
+func NewPaymentsService(ordersService ordersService, providerService providerService) PaymentsService {
+	return PaymentsService{ordersService, providerService}
 }
 
 func (s PaymentsService) InitializeOrderPayment(orderID string, price price.Price) error {
@@ -25,7 +30,7 @@ func (s PaymentsService) InitializeOrderPayment(orderID string, price price.Pric
 
 	go func() {
 		time.Sleep(time.Millisecond * 500)
-		if err := s.PostOrderPayment(orderID); err != nil {
+		if err := s.providerService.InitPaymentProvider(orderID, price); err != nil {
 			log.Printf("cannot post order payment: %s", err)
 		}
 	}()
