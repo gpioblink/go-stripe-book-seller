@@ -3,6 +3,7 @@ package payments
 import (
 	"fmt"
 	"github.com/gpioblink/go-stripe-book-seller/pkg/common/price"
+	payments "github.com/gpioblink/go-stripe-book-seller/pkg/payments/domain"
 	"github.com/stripe/stripe-go"
 	"github.com/stripe/stripe-go/checkout/session"
 )
@@ -13,12 +14,13 @@ type ConfirmedPayment struct {
 }
 
 type StripeService struct {
+	repository payments.Repository
 	// TODO: product情報を取得して決済画面で商品の詳細を表示できるようにする
 }
 
-func NewStripeService(apiKey string) StripeService {
+func NewStripeService(apiKey string, repository payments.Repository) StripeService {
 	stripe.Key = apiKey
-	return StripeService{}
+	return StripeService{repository}
 }
 
 func (s StripeService) InitPaymentProvider(orderID string, price price.Price) error {
@@ -40,7 +42,17 @@ func (s StripeService) InitPaymentProvider(orderID string, price price.Price) er
 		SuccessURL: stripe.String("https://example.com/success?session_id={CHECKOUT_SESSION_ID}"),
 		CancelURL:  stripe.String("https://example.com/cancel"),
 	}
-	_, err := session.New(params)
+	res, err := session.New(params)
+	if err != nil {
+		return err
+	}
+
+	// save paymentID and orderID as a table to convert order
+	payment, err := payments.NewPayment(orderID, res.ID)
+	if err != nil {
+		return err
+	}
+	err = s.repository.Save(&payment)
 	if err != nil {
 		return err
 	}

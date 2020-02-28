@@ -71,7 +71,7 @@ func createMonolith(ordersToPay chan payments_interfaces_intraprocess.OrderToPro
 	paymentsRepo := payments_infra_database.NewMemoryRepository()
 	paymentsService := payments_app.NewPaymentsService(
 		payments_infra_orders.NewIntraprocessService(ordersIntraprocessInterface),
-		payments_infra_stripe.NewStripeService(os.Getenv("SHOP_MONOLITH_STRIPE_SECRET_KEY")),
+		payments_infra_stripe.NewStripeService(os.Getenv("SHOP_MONOLITH_STRIPE_SECRET_KEY"), paymentsRepo),
 		paymentsRepo,
 	)
 	paymentsIntraprocessInterface := payments_interfaces_intraprocess.NewPaymentsInterface(ordersToPay, paymentsService)

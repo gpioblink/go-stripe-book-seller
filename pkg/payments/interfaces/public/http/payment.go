@@ -10,7 +10,7 @@ import (
 
 func AddRoutes(router *chi.Mux, service application.PaymentsService) {
 	resource := paymentResource{service}
-	router.Get("payments/{id}", resource.Get)
+	router.Get("/payments/{id}", resource.Get)
 }
 
 type paymentResource struct {
@@ -18,7 +18,7 @@ type paymentResource struct {
 }
 
 type PaymentView struct {
-	PaymentID string `json:"order_id"`
+	PaymentID string `json:"PaymentID"`
 }
 
 func (p paymentResource) Get(w http.ResponseWriter, r *http.Request) {

@@ -6,11 +6,11 @@ type Payment struct {
 }
 
 func (p Payment) OrderId() string {
-	return p.OrderId()
+	return p.orderID
 }
 
 func (p Payment) PaymentId() string {
-	return p.PaymentId()
+	return p.paymentID
 }
 
 func NewPayment(orderId string, paymentId string) (Payment, error) {
