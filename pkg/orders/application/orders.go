@@ -8,6 +8,10 @@ import (
 	"github.com/pkg/errors"
 )
 
+type printerService interface {
+	PrintReceipt(order orders.Order) error
+}
+
 type productsService interface {
 	ProductByID(id orders.ProductID) (orders.Product, error)
 }
@@ -19,12 +23,13 @@ type paymentsService interface {
 type OrdersService struct {
 	productsService productsService
 	paymentsService paymentsService
+	printerService  printerService
 
 	ordersRepository orders.Repository
 }
 
-func NewOrdersService(productsService productsService, paymentsService paymentsService, ordersRepository orders.Repository) OrdersService {
-	return OrdersService{productsService, paymentsService, ordersRepository}
+func NewOrdersService(productsService productsService, paymentsService paymentsService, printerService printerService, ordersRepository orders.Repository) OrdersService {
+	return OrdersService{productsService, paymentsService, printerService, ordersRepository}
 }
 
 type PlaceOrderCommandAddress struct {
@@ -85,6 +90,11 @@ func (s OrdersService) MarkOrderAsPaid(cmd MarkOrderAsPaidCommand) error {
 	o, err := s.ordersRepository.ByID(cmd.OrderID)
 	if err != nil {
 		return errors.Wrapf(err, "cannot get order %s", cmd.OrderID)
+	}
+
+	err = s.printerService.PrintReceipt(*o)
+	if err != nil {
+		return errors.Wrapf(err, "cannot print receipt %s", cmd.OrderID)
 	}
 
 	o.MarkAsPaid()

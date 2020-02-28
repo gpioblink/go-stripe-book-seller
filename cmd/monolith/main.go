@@ -2,10 +2,14 @@ package main
 
 // yep, it's a bit ugly :(
 import (
+	orders_infra_printer "github.com/gpioblink/go-stripe-book-seller/pkg/orders/infrastructure/printer"
 	payments_infra_database "github.com/gpioblink/go-stripe-book-seller/pkg/payments/infrastructure/database"
 	payments_infra_stripe "github.com/gpioblink/go-stripe-book-seller/pkg/payments/infrastructure/payments"
 	payments_interfaces_http "github.com/gpioblink/go-stripe-book-seller/pkg/payments/interfaces/public/http"
 	payments_interfaces_stripe_http "github.com/gpioblink/go-stripe-book-seller/pkg/payments/interfaces/stripe/http"
+	printer_app "github.com/gpioblink/go-stripe-book-seller/pkg/printer/application"
+	printer_infra_lineprinter "github.com/gpioblink/go-stripe-book-seller/pkg/printer/infrastructure/printer"
+	printer_interfaces_intraprocess "github.com/gpioblink/go-stripe-book-seller/pkg/printer/interfaces/private/intraprocess"
 	"log"
 	"net/http"
 	"os"
@@ -61,10 +65,15 @@ func createMonolith(ordersToPay chan payments_interfaces_intraprocess.OrderToPro
 	shopProductsService := shop_app.NewProductsService(shopProductRepo, shopProductRepo)
 	shopProductIntraprocessInterface := shop_interfaces_intraprocess.NewProductInterface(shopProductRepo)
 
+	printerLinePrinterRepo := printer_infra_lineprinter.NewPrinterInterface()
+	printerService := printer_app.NewPrinterService(printerLinePrinterRepo)
+	printerIntraprocessInterface := printer_interfaces_intraprocess.NewPrinterInterface(printerService)
+
 	ordersRepo := orders_infra_orders.NewMemoryRepository()
 	orderService := orders_app.NewOrdersService(
 		orders_infra_product.NewIntraprocessService(shopProductIntraprocessInterface),
 		orders_infra_payments.NewIntraprocessService(ordersToPay),
+		orders_infra_printer.NewIntraprocessService(printerIntraprocessInterface, shopProductIntraprocessInterface),
 		ordersRepo,
 	)
 	ordersIntraprocessInterface := orders_interfaces_intraprocess.NewOrdersInterface(orderService)
