@@ -18,10 +18,13 @@ type Product struct {
 	name        string
 	description string
 
+	isbn         string // TODO: 本当は「media」とか作っていろいろすべきだろうな
+	thumbnailUrl string
+
 	price price.Price
 }
 
-func NewProduct(id ID, name string, description string, price price.Price) (*Product, error) {
+func NewProduct(id ID, name string, description string, isbn string, thumbnailUrl string, price price.Price) (*Product, error) {
 	if len(id) == 0 {
 		return nil, ErrEmptyID
 	}
@@ -29,7 +32,7 @@ func NewProduct(id ID, name string, description string, price price.Price) (*Pro
 		return nil, ErrEmptyName
 	}
 
-	return &Product{id, name, description, price}, nil
+	return &Product{id, name, description, isbn, thumbnailUrl, price}, nil
 }
 
 func (p Product) ID() ID {
@@ -42,6 +45,14 @@ func (p Product) Name() string {
 
 func (p Product) Description() string {
 	return p.description
+}
+
+func (p Product) Isbn() string {
+	return p.isbn
+}
+
+func (p Product) ThumbnailUrl() string {
+	return p.thumbnailUrl
 }
 
 func (p Product) Price() price.Price {

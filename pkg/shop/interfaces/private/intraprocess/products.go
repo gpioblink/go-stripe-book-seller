@@ -7,10 +7,12 @@ import (
 )
 
 type Product struct {
-	ID          string
-	Name        string
-	Description string
-	Price       price.Price
+	ID           string
+	Name         string
+	Description  string
+	ThumbnailUrl string
+	Isbn         string
+	Price        price.Price
 }
 
 func ProductFromDomainProduct(domainProduct products.Product) Product {
@@ -18,6 +20,8 @@ func ProductFromDomainProduct(domainProduct products.Product) Product {
 		string(domainProduct.ID()),
 		domainProduct.Name(),
 		domainProduct.Description(),
+		domainProduct.ThumbnailUrl(),
+		domainProduct.Isbn(),
 		domainProduct.Price(),
 	}
 }

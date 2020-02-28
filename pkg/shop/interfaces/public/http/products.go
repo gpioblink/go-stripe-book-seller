@@ -22,8 +22,10 @@ type productsReadModel interface {
 type productView struct {
 	ID string `json:"id"`
 
-	Name        string `json:"name"`
-	Description string `json:"description"`
+	Name         string `json:"name"`
+	Description  string `json:"description"`
+	ThumbnailUrl string `json:"thumbnail"`
+	Isbn         string `json:"isbn"`
 
 	Price priceView `json:"price"`
 }
@@ -54,6 +56,8 @@ func (p productsResource) GetAll(w http.ResponseWriter, r *http.Request) {
 			string(product.ID()),
 			product.Name(),
 			product.Description(),
+			product.ThumbnailUrl(),
+			product.Isbn(),
 			priceViewFromPrice(product.Price()),
 		})
 	}

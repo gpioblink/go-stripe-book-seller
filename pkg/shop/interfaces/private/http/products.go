@@ -22,8 +22,10 @@ type productsResource struct {
 type ProductView struct {
 	ID string `json:"id"`
 
-	Name        string `json:"name"`
-	Description string `json:"description"`
+	Name         string `json:"name"`
+	Description  string `json:"description"`
+	ThumbnailUrl string `json:"thumbnail"`
+	Isbn         string `json:"isbn"`
 
 	Price PriceView `json:"price"`
 }
@@ -49,6 +51,8 @@ func (p productsResource) Get(w http.ResponseWriter, r *http.Request) {
 		string(product.ID()),
 		product.Name(),
 		product.Description(),
+		product.ThumbnailUrl(),
+		product.Isbn(),
 		priceViewFromPrice(product.Price()),
 	})
 }
