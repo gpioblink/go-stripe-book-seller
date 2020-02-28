@@ -13,7 +13,7 @@ type ordersService interface {
 }
 
 type providerService interface {
-	InitPaymentProvider(orderID string, price price.Price) error
+	InitPaymentProvider(orderID string, name string, price price.Price) error
 }
 
 type PaymentsService struct {
@@ -26,13 +26,13 @@ func NewPaymentsService(ordersService ordersService, providerService providerSer
 	return PaymentsService{ordersService, providerService, repository}
 }
 
-func (s PaymentsService) InitializeOrderPayment(orderID string, price price.Price) error {
+func (s PaymentsService) InitializeOrderPayment(orderID string, name string, price price.Price) error {
 	// ...
 	log.Printf("initializing payment for order %s", orderID)
 
 	go func() {
 		time.Sleep(time.Millisecond * 500)
-		if err := s.providerService.InitPaymentProvider(orderID, price); err != nil {
+		if err := s.providerService.InitPaymentProvider(orderID, name, price); err != nil {
 			log.Printf("cannot post order payment: %s", err)
 		}
 	}()

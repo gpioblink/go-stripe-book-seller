@@ -14,7 +14,7 @@ func NewIntraprocessService(ordersChannel chan<- intraprocess.OrderToProcess) In
 	return IntraprocessService{ordersChannel}
 }
 
-func (i IntraprocessService) InitializeOrderPayment(id orders.ID, price price.Price) error {
-	i.orders <- intraprocess.OrderToProcess{string(id), price}
+func (i IntraprocessService) InitializeOrderPayment(id orders.ID, name string, price price.Price) error {
+	i.orders <- intraprocess.OrderToProcess{string(id), name, price}
 	return nil
 }

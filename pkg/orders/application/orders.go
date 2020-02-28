@@ -13,7 +13,7 @@ type productsService interface {
 }
 
 type paymentsService interface {
-	InitializeOrderPayment(id orders.ID, price price.Price) error
+	InitializeOrderPayment(id orders.ID, name string, price price.Price) error
 }
 
 type OrdersService struct {
@@ -68,7 +68,7 @@ func (s OrdersService) PlaceOrder(cmd PlaceOrderCommand) error {
 		return errors.Wrap(err, "cannot save order")
 	}
 
-	if err := s.paymentsService.InitializeOrderPayment(newOrder.ID(), newOrder.Product().Price()); err != nil {
+	if err := s.paymentsService.InitializeOrderPayment(newOrder.ID(), newOrder.Product().Name(), newOrder.Product().Price()); err != nil {
 		return errors.Wrap(err, "cannot initialize payment")
 	}
 

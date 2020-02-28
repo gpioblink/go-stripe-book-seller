@@ -10,6 +10,7 @@ import (
 
 type OrderToProcess struct {
 	ID    string
+	Name  string
 	Price price.Price
 }
 
@@ -39,7 +40,7 @@ func (o PaymentsInterface) Run() {
 			o.orderProcessingWg.Add(1)
 			defer o.orderProcessingWg.Done()
 
-			if err := o.service.InitializeOrderPayment(orderToPay.ID, orderToPay.Price); err != nil {
+			if err := o.service.InitializeOrderPayment(orderToPay.ID, orderToPay.Name, orderToPay.Price); err != nil {
 				log.Print("Cannot initialize payment:", err)
 			}
 		}(order)

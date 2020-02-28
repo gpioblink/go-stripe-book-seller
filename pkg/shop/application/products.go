@@ -41,7 +41,7 @@ func (s ProductsService) AddProduct(cmd AddProductCommand) error {
 		return errors.Wrap(err, "invalid product price")
 	}
 
-	p, err := products.NewProduct(products.ID(cmd.ID), cmd.Name, cmd.Description, cmd.ThumbnailUrl, cmd.Isbn, price)
+	p, err := products.NewProduct(products.ID(cmd.ID), cmd.Name, cmd.Description, cmd.Isbn, cmd.ThumbnailUrl, price)
 	if err != nil {
 		return errors.Wrap(err, "cannot create product")
 	}

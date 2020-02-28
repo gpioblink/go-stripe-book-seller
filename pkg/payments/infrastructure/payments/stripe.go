@@ -1,7 +1,6 @@
 package payments
 
 import (
-	"fmt"
 	"github.com/gpioblink/go-stripe-book-seller/pkg/common/price"
 	payments "github.com/gpioblink/go-stripe-book-seller/pkg/payments/domain"
 	"github.com/stripe/stripe-go"
@@ -23,7 +22,7 @@ func NewStripeService(apiKey string, repository payments.Repository) StripeServi
 	return StripeService{repository}
 }
 
-func (s StripeService) InitPaymentProvider(orderID string, price price.Price) error {
+func (s StripeService) InitPaymentProvider(orderID string, name string, price price.Price) error {
 	//TODO: need editing
 
 	params := &stripe.CheckoutSessionParams{
@@ -32,8 +31,8 @@ func (s StripeService) InitPaymentProvider(orderID string, price price.Price) er
 		}),
 		LineItems: []*stripe.CheckoutSessionLineItemParams{
 			{
-				Name:        stripe.String(fmt.Sprintf("Item %s", orderID)),
-				Description: stripe.String("Sample product"),
+				Name:        stripe.String(name),
+				Description: stripe.String("じぶりん中古本ショップ"),
 				Amount:      stripe.Int64(int64(price.Cents())),
 				Currency:    stripe.String(price.Currency()),
 				Quantity:    stripe.Int64(1),
