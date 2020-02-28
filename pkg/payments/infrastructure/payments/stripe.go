@@ -39,8 +39,8 @@ func (s StripeService) InitPaymentProvider(orderID string, price price.Price) er
 				Quantity:    stripe.Int64(1),
 			},
 		},
-		SuccessURL: stripe.String("https://example.com/success?session_id={CHECKOUT_SESSION_ID}"),
-		CancelURL:  stripe.String("https://example.com/cancel"),
+		SuccessURL: stripe.String("https://stripe-sample.gpioblink.now.sh/success.html?session_id={CHECKOUT_SESSION_ID}"),
+		CancelURL:  stripe.String("https://stripe-sample.gpioblink.now.sh/error.html"),
 	}
 	res, err := session.New(params)
 	if err != nil {
